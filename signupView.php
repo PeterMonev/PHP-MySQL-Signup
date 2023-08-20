@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Form</title>
-
-    <!-- Bootstrap JS and jQuery -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
+<?php include('./header.php'); ?>
 
 <body>
-
     <div class="container mt-5">
         <h2>Signup Form</h2>
         <form action="signupController.php" method="post">
@@ -39,11 +27,9 @@
             <button type="submit" name="signup" class="btn btn-primary">Sign Up</button>
             <div class="form-group">
                 <label for="route">You already have an account? Go to login.</label>  
-                <a href="http://localhost/signup/loginView.php">Login</a>
+                <a href="loginView.php">Login</a>
             </div>
         </form>
     </div>
-.
 </body>
 
-</html>

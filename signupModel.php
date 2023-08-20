@@ -59,6 +59,22 @@ class signupModel {
         return $this->phone;
     }
 
+    public function checkUser($email){
+        try{
+            $statement = $this->dbCnx->prepare("SELECT * FROM users WHERE email = '$email'");
+            $statement->execute();
+            
+            if($statement->fetchColumn()){
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception $error) {
+            return $error->getMessage();
+        }
+    }
+
     public function insertData(){
         try{
             echo $this->getUsername();
