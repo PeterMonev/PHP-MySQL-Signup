@@ -10,8 +10,7 @@ if(isset($_POST['login'])){
 
     $login = $info->login();
     if($login){
-      
-        header("Location:index.php");
+        header("Location:profileView.php");
 
     } else {
         
