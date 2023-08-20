@@ -10,9 +10,7 @@ if(isset($_POST['signup'])){
   
     $singup->insertData();
 
-    echo 'done';
-
-    echo '<script>alert("User CRETED");document.location="index.php"</script>';
+    echo '<script>alert("User CRETED");document.location="loginView.php"</script>';
 
 }
 

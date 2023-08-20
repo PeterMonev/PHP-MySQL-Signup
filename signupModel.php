@@ -64,7 +64,7 @@ class signupModel {
             echo $this->getUsername();
             $statement = $this->dbCnx->prepare("INSERT INTO users(username, email, password, phone) values(?,?,?,?)");
             $statement->execute([$this->username,$this->email,$this->password,$this->phone]);
-
+      
         } catch(Exception $error){
             return $error->getMessage();
         }

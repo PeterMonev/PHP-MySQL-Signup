@@ -36,7 +36,11 @@
                 <label for="phone">Phone:</label>
                 <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
             </div>
-            <button type="submit" name="signup" class="btn btn-primary">Signup</button>
+            <button type="submit" name="signup" class="btn btn-primary">Sign Up</button>
+            <div class="form-group">
+                <label for="route">You already have an account? Go to login.</label>  
+                <a href="http://localhost/signup/loginView.php">Login</a>
+            </div>
         </form>
     </div>
 .
