@@ -15,7 +15,7 @@ var_dump($_SESSION);
 ?>
 
 
-
+c
 <body>
 
 <div class="container mt-5">
@@ -29,7 +29,7 @@ var_dump($_SESSION);
             <p class="card-text">Password: ********** </p>
             <p class="card-text">Phone: <?php echo $_SESSION['phone']; ?></p>
             <a href="#" class="btn btn-primary">Update Profile</a>
-            <a href="#" class="btn btn-danger">Logout</a>
+            <a href="logout.php" class="btn btn-danger">Logout</a>
         </div>
     </div>
 </div>
