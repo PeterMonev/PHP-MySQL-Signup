@@ -35,7 +35,14 @@ session_start();
             </div>
         </form>
     </div>
-
+    <script>
+        setTimeout(function() {
+            const alertDiv = document.querySelector('.alert-danger');
+            if (alertDiv) {
+                alertDiv.style.display = 'none';
+            }
+        }, 3000);  // The alert will disappear after 3 seconds 
+    </script>
 </body>
 
 

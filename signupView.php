@@ -53,7 +53,7 @@ session_start(); ?>
             if (alertDiv) {
                 alertDiv.style.display = 'none';
             }
-        }, 3000);  // The alert will disappear after 5 seconds 
+        }, 3000);  // The alert will disappear after 3 seconds 
     </script>
 </body>
 

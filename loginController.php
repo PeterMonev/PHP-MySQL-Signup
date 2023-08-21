@@ -13,14 +13,14 @@ if(isset($_POST['login'])){
      // Check email if empty are empty or it has a valid format
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['error_message'] = 'Invalid password or email!';
-        header('Locate: loginView.php'); // Redirect to login page
+        header('Location: loginView.php'); // Redirect to login page
         exit();
     }
 
     // Check password is empty 
     if(empty($password) || strlen($password) < 8){
         $_SESSION['error_message'] = 'Invalid password or email!';
-        header('Locate: loginView.php'); // Redirect to login page
+        header('Location: loginView.php'); // Redirect to login page
         exit();
     }
 
