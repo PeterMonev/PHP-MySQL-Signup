@@ -10,7 +10,8 @@ session_start(); ?>
         echo '<div class="alert alert-primary" role="alert"> '.
         $_SESSION['success_message'] . ' <a href="loginView.php" class="alert-link">Login here</a></div>';
         unset($_SESSION['success_message']);
-    } elseif (isset($_SESSION['error_message'])) {
+    } 
+    if (isset($_SESSION['error_message'])) {
         echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
         unset($_SESSION['error_message']);
     }

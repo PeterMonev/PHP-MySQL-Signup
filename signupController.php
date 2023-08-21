@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Takes params from submit form
+// Check if the register form has been submitted.
 if(isset($_POST['signup'])){
     require_once("signupModel.php");
 
@@ -49,19 +49,20 @@ if(isset($_POST['signup'])){
     exit();
     }
 
-
+    
     $singup = new signupModel();
     $singup->setUsername($_POST['username']);
     $singup->setEmail($_POST['email']);
     $singup->setPassword($_POST['password']);
     $singup->setPhone($_POST['phone']);
-
+      
+    // Check for existing email
     if($singup->checkUser($_POST['email'])){
         $_SESSION['error_message'] = 'Sorry, email already exist. Please try again another.';
         header("Location: signupView.php");
         exit();
     } else {
-        $singup->insertData();
+        $singup->insertData(); 
         $_SESSION['success_message'] = 'Registretion successful!';
         header("Location: signupView.php");
         exit();

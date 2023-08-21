@@ -40,16 +40,6 @@ class LoginModel {
         return $this->password;
     }
 
-    public function fetchAll(){
-        try{
-            $statament = $this->dbCnx->prepare("SELECT * FROM users");
-            $statament->execute();
-            return $statament->fetchAll();
-
-        } catch (Exception $error){
-            return $error->getMessage();
-        }
-    }
 
     public function login(){
         try {
@@ -68,7 +58,7 @@ class LoginModel {
 
             
        } catch (Exception $error){
-            return $error->getMessage();
+            return $_SESSION['error_message'] = "Login failed: " . $error->getMessage();
        }
      }
 } 
