@@ -61,7 +61,8 @@ class signupModel {
 
     public function checkUser($email){
         try{
-            $statement = $this->dbCnx->prepare("SELECT * FROM users WHERE email = '$email'");
+            $statement = $this->dbCnx->prepare("SELECT * FROM users WHERE email = :email");
+            $statement->bindParam(":email", $email);
             $statement->execute();
             
             if($statement->fetchColumn()){
@@ -71,7 +72,7 @@ class signupModel {
             }
 
         } catch (Exception $error) {
-            return $error->getMessage();
+            return $_SESSION['error_message'] = "Registration failed: " . $error->getMessage();
         }
     }
 
@@ -81,8 +82,8 @@ class signupModel {
             $statement = $this->dbCnx->prepare("INSERT INTO users(username, email, password, phone) values(?,?,?,?)");
             $statement->execute([$this->username,$this->email,$this->password,$this->phone]);
       
-        } catch(Exception $error){
-            return $error->getMessage();
+        } catch(PDOException $error){
+            return $_SESSION['error_message'] = "Registration failed: " . $error->getMessage();
         }
     }
 }

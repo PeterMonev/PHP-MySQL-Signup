@@ -1,0 +1,31 @@
+/* RESET */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: 0;
+  background-color: unset;
+  cursor: pointer;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+/* APP STYLES */
+
+.body {
+  font-family: "Roboto", sans-serif;
+  background-color: black !important;
+}
+
+.alert {
+    text-align: center !important;
+}

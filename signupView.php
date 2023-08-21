@@ -1,6 +1,21 @@
-<?php include('./header.php'); ?>
+<?php 
+include('./header.php');
+session_start(); ?>
 
 <body>
+  
+<!-- Successful and Alert message -->
+<?php
+    if (isset($_SESSION['success_message'])) {
+        echo '<div class="alert alert-primary" role="alert"> '.
+        $_SESSION['success_message'] . ' <a href="loginView.php" class="alert-link">Login here</a></div>';
+        unset($_SESSION['success_message']);
+    } elseif (isset($_SESSION['error_message'])) {
+        echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
+        unset($_SESSION['error_message']);
+    }
+?>
+
     <div class="container mt-5">
         <h2>Signup Form</h2>
         <form action="signupController.php" method="post">
@@ -31,5 +46,13 @@
             </div>
         </form>
     </div>
+    <script>
+        setTimeout(function() {
+            const alertDiv = document.querySelector('.alert-danger');
+            if (alertDiv) {
+                alertDiv.style.display = 'none';
+            }
+        }, 3000);  // The alert will disappear after 5 seconds 
+    </script>
 </body>
 

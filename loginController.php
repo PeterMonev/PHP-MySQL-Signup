@@ -10,6 +10,7 @@ if(isset($_POST['login'])){
 
     $login = $info->login();
     if($login){
+        $_SESSION['success_message'] = 'Login succesful!';
         header("Location:profileView.php");
 
     } else {

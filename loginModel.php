@@ -60,11 +60,7 @@ class LoginModel {
             if($user && password_verify($this->password, $user[0]['password'])){
                 session_start();
                 $_SESSION['id'] = $user[0]['id'];
-                $_SESSION['username'] = $user[0]['username'];
-                $_SESSION['email'] = $user[0]['email'];
-                $_SESSION['password'] = $user[0]['password'];
-                $_SESSION['phone'] = $user[0]['phone'];
-
+        
                 return true;
             } else {
                 return false;
