@@ -1,12 +1,8 @@
 <?php 
+session_start();
 include('./header.php'); 
 require_once("loginModel.php");
-session_start();
-
-if(!isset($_SESSION['id'])){
-    header('Location: loginView.php'); // Redicert to login page
-    exit();
-}
+include('./authentication.php');
 ?>
 
 <?php 
@@ -15,7 +11,7 @@ var_dump($_SESSION);
 ?>
 
 
-c
+
 <body>
 
 <div class="container mt-5">
