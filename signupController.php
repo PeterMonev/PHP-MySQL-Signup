@@ -19,8 +19,17 @@ if(isset($_POST['signup'])){
         exit();
     }
 
+    // Check username field
+    if(strlen($username) < 3){
+        $_SESSION['error-message'] = 'Username must be at lest 3 characters';
+        header('Location: signupView.php');
+        exit();
+    }
+
      // Validate email format
-     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+     $emailRegex = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/";
+
+     if(!filter_var($email, FILTER_VALIDATE_EMAIL || !preg_match($emailRegex, $email))){
         $_SESSION['error_message'] = 'Invalid email format.';
         header("Location: signupView.php");
         exit();
@@ -41,9 +50,9 @@ if(isset($_POST['signup'])){
     }
    
     // A simple regex for validating Bulgarian phone numbers
-    $pattern = "/^(\+359|0)[0-9]{9}$/";
+    $phoneRegex = "/^(\+359|0)[0-9]{9}$/";
 
-    if(!preg_match($pattern, $phone)){
+    if(!preg_match($phoneRegex, $phone)){
     $_SESSION['error_message'] = 'Invalid phone number format. You are phone number must be like: +359 XX XXX XXX';
     header("Location: signupView.php");
     exit();

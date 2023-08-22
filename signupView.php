@@ -7,19 +7,19 @@ session_start(); ?>
 <!-- Successful and Alert message -->
 <?php
     if (isset($_SESSION['success_message'])) {
-        echo '<div class="alert alert-primary" role="alert"> '.
+        echo '<div class="alert alert-success text-center" role="alert"> '.
         $_SESSION['success_message'] . ' <a href="loginView.php" class="alert-link">Login here</a></div>';
         unset($_SESSION['success_message']);
     } 
     if (isset($_SESSION['error_message'])) {
         echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
-        unset($_SESSION['error_message']);
+        unset($_SESSION['error_message text-center']);
     }
 ?>
 
-    <div class="container mt-5">
-        <h2>Signup Form</h2>
-        <form action="signupController.php" method="post">
+    <div class="container mt-5 text-center shadow-lg">
+        <h2>Sign Up Form</h2>
+        <form id="signupForm" action="signupController.php" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
@@ -47,6 +47,7 @@ session_start(); ?>
             </div>
         </form>
     </div>
+    <script src="./utility/validation.js"></script>
     <script>
         setTimeout(function() {
             const alertDiv = document.querySelector('.alert-danger');
