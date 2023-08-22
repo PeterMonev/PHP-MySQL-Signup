@@ -49,7 +49,7 @@ if(isset($_POST['signup'])){
         exit();
     }
    
-    // A simple regex for validating Bulgarian phone numbers
+    //  regex validating Bulgarian phone numbers
     $phoneRegex = "/^(\+359|0)[0-9]{9}$/";
 
     if(!preg_match($phoneRegex, $phone)){
