@@ -10,7 +10,7 @@ class ProfileModel {
 
     protected $dbCnx;
 
-    public function __construct($id=0, $username="", $email="", $phone=""){
+    public function __construct($username="", $email="", $phone=""){
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;

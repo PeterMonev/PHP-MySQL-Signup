@@ -3,6 +3,8 @@
 session_start();
 require_once('profileModel.php');
 
+class ValidationException extends Exception {}
+
 function getUserData(){
     if(!isset($_SESSION['id'])){
       // Redirect if not logged in
@@ -16,72 +18,62 @@ function getUserData(){
 }
 
 if(isset($_POST['update'])){
-    $userData = getUserData(); 
+    try {
+        $userData = getUserData(); 
 
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
+        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
+        $phone = trim($_POST['phone']);
 
-    // Backend validations
-    if(empty($username) || empty($email) || empty($phone)){
-        $_SESSION['error_message'] = 'All fields are required.';
-        header("Location: profileView.php");
-        exit();
-    }
+        // Backend validations
+        if(empty($username) || empty($email) || empty($phone)){
+            throw new ValidationException('All fields are required.');
+        }
 
-    // Check username field
-    if(strlen($username) < 3){
-        $_SESSION['error-message'] = 'Username must be at lest 3 characters';
-        header('Location: profileView.php');
-        exit();
-    }
+        // Check username field
+        if(strlen($username) < 3){
+            throw new ValidationException('Username must be at least 3 characters.');
+        }
 
-     // Validate email format
-     $emailRegex = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/";
+        // Validate email format
+        $emailRegex = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/";
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match($emailRegex, $email)){
+            throw new ValidationException('Invalid email format.');
+        }
 
-     if(!filter_var($email, FILTER_VALIDATE_EMAIL || !preg_match($emailRegex, $email))){
-        $_SESSION['error_message'] = 'Invalid email format.';
-        header("Location: profileView.php");
-        exit();
-    }
+        // regex validating Bulgarian phone numbers
+        $phoneRegex = "/^(\+359|0)[0-9]{9}$/";
+        if(!preg_match($phoneRegex, $phone)){
+            throw new ValidationException('Invalid phone number format. Your phone number must be like: +359 XX XXX XXX');
+        }
 
-    //  regex validating Bulgarian phone numbers
-     $phoneRegex = "/^(\+359|0)[0-9]{9}$/";
+        $newProfile = new ProfileModel();
+        $newProfile->setUsername($username);
+        $newProfile->setEmail($email);
+        $newProfile->setPhone($phone);
 
-     if(!preg_match($phoneRegex, $phone)){
-        $_SESSION['error_message'] = 'Invalid phone number format. You are phone number must be like: +359 XX XXX XXX';
-        header("Location: profileView.php");
-        exit();
-    }
+        if($userData['email'] === $email){
+            $newProfile->updateProfile($_SESSION['id']); 
+            $_SESSION['success_message'] = 'Update successful!';
+            header("Location: profileView.php?showModal=true");
+            exit();
+        } else {
+            // Check for existing email
+            if($newProfile->checkUser($email)){
+                throw new ValidationException('Sorry, email already exists. Please try another.');
+            } else {
+                $newProfile->updateProfile($_SESSION['id']); 
+                $_SESSION['success_message'] = 'Update successful!';
+                header("Location: profileView.php?showModal=true");
+                exit();
+            } 
+        }
 
-
-    $newProfile = new ProfileModel();
-    $newProfile->setUsername($username);
-    $newProfile->setEmail($email);
-    $newProfile->setPhone($phone);
-
-    if($userData['email'] === $email){
-        $newProfile->updateProfile($_SESSION['id']); 
-        $_SESSION['success_message'] = 'Update successful!';
+    } catch (ValidationException $e) {
+        $_SESSION['error_message'] = $e->getMessage();
         header("Location: profileView.php?showModal=true");
         exit();
-    } else {
-       // Check for existing email
-       if($newProfile->checkUser($_POST['email'])){
-        $_SESSION['error_message'] = 'Sorry, email already exist. Please try again with another.';
-        header("Location: profileView.php?showModal=true");
-        exit();
-    } else {
-        $newProfile->updateProfile($_SESSION['id']); 
-        $_SESSION['success_message'] = 'Update successful!';
-        header("Location: profileView.php?showModal=true");
-        exit();
-    } 
-
-
     }
 }
-
-
 
 ?>

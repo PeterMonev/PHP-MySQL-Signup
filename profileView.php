@@ -65,6 +65,16 @@ $userData = getUserData();
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('showModal') && urlParams.get('showModal') === 'true') {
+        const modalElement = document.getElementById('updateProfileModal');
+        // Assuming you're using Bootstrap
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    }
+});
+
         setTimeout(function() {
             const alertDiv = document.querySelector('.alert');
             if (alertDiv) {

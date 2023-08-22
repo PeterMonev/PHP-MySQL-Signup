@@ -2,26 +2,25 @@
 
 session_start();
 
+class ValidationException extends Exception{}
+
 // Check if the login form has been submitted.
 if(isset($_POST['login'])){
     require_once('loginModel.php');
 
+    try{
     // Backend Valdaiton
     $email= trim($_POST['email']);
     $password= trim($_POST['password']);
 
      // Check email if empty are empty or it has a valid format
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['error_message'] = 'Invalid password or email!';
-        header('Location: loginView.php'); // Redirect to login page
-        exit();
+        throw new ValidationException('Invalid email format.');
     }
 
     // Check password is empty 
     if(empty($password) || strlen($password) < 8){
-        $_SESSION['error_message'] = 'Invalid password or email!';
-        header('Location: loginView.php'); // Redirect to login page
-        exit();
+        throw new ValidationException('Password is either empty or less than 8 characters.');
     }
 
     $userInfo = new LoginModel(); // Create an instance of the LoginModel class
@@ -29,7 +28,6 @@ if(isset($_POST['login'])){
     $userInfo->setPassword($_POST['password']);
 
     $login = $userInfo->login(); // Check the credentials against the database
-
 
     if($login){
         $_SESSION['success_message'] = 'Login succesful!'; // If credentials are valid.
@@ -41,6 +39,11 @@ if(isset($_POST['login'])){
         exit();
     }
 
+    } catch (ValidationException $e) {
+         $_SESSION['error_message'] = $e->getMessage();
+         header('Location: loginView.php');
+         exit();
+    }
 }
 
 ?>
