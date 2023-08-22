@@ -10,8 +10,7 @@ $(document).ready(function() {
             validateField(phone, '#phone', 'Invalid phone format. You are phone number must be like: +359 XX XXX XXX');
             
             if (!repeatPassword || password !== repeatPassword) {
-
-                alertNotifaction(  $('#repeatPassword'), "Passwords do not match.")
+                alertNotifaction(  $('#repeatPassword'), "Passwords do not match.");
             }
 
             if ($('.border-danger').length > 0) {

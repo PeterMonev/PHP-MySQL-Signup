@@ -12,8 +12,8 @@ session_start(); ?>
         unset($_SESSION['success_message']);
     } 
     if (isset($_SESSION['error_message'])) {
-        echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
-        unset($_SESSION['error_message text-center']);
+        echo '<div class="alert alert-danger" role="alert" text-center>' . $_SESSION['error_message'] . '</div>';
+        unset($_SESSION['error_message']);
     }
 ?>
 
