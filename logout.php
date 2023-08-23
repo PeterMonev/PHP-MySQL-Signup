@@ -4,7 +4,7 @@ session_start();
 session_unset();
 session_destroy();
 
-header("Location: loginView.php");
+header("Location: ./views/loginView.php");
 exit();
 
 ?>

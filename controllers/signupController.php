@@ -5,7 +5,7 @@ class ValidationException extends Exception {}
 
 // Check if the register form has been submitted.
 if(isset($_POST['signup'])){
-    require_once("./signupModel.php");
+    require_once("../models/signupModel.php");
 
     try {
         // Backend Validation
@@ -61,13 +61,13 @@ if(isset($_POST['signup'])){
         } else {
             $signup->insertData(); 
             $_SESSION['success_message'] = 'Registration successful!';
-            header("Location: signupView.php");
+            header("Location: ../views/signupView.php");
             exit();
         }
 
     } catch (ValidationException $e) {
         $_SESSION['error_message'] = $e->getMessage();
-        header("Location: signupView.php");
+        header("Location: ../views/signupView.php");
         exit();
     }
 }

@@ -3,32 +3,38 @@ $(document).ready(function() {
     // All submit forn in projects validation
      $('form').on('submit', function(event) {
         const { username, password, repeatPassword, phone, email, current_password, new_password, confirm_new_password,newPassword } = Object.fromEntries(new FormData(this));
-        console.log(newPassword);
+
         try {
-            validateField(username, '#username', 'Username must be at least 3 characters long.');
-            validateField(password, '#password', 'Password must be at least 8 characters long.');
-            validateField(email, '#email','Invalid email format. You are email muse be like: example@abv.bg.');
-            validateField(phone, '#phone', 'Invalid phone format. You are phone number must be like: +359 XX XXX XXX');
-            validateField(current_password, '#current_password', 'Password must be at least 8 characters long.');
-            validateField(new_password, '#new_password', 'Password must be at least 8 characters long.');
-            validateField(newPassword, '#newPassword', 'Password must be at least 8 characters long.');
+            if(event.target.id !== "changePasswordForm"){
+                validateField(username, '#username', 'Username must be at least 3 characters long.');
+                validateField(password, '#password', 'Password must be at least 8 characters long.');
+                validateField(email, '#email','Invalid email format. You are email muse be like: example@abv.bg.');
+                validateField(phone, '#phone', 'Invalid phone format. You are phone number must be like: +359 XX XXX XXX');
+                validateField(newPassword, '#newPassword', 'Password must be at least 8 characters long.');
 
-
-            if (!repeatPassword || password !== repeatPassword) {
-                alertNotifaction(  $('#repeatPassword'), "Passwords do not match.");
+                if (!repeatPassword || password !== repeatPassword) {
+                    alertNotifaction(  $('#repeatPassword'), "Passwords do not match.");
+                }
             }
 
-            if (!confirm_new_password || new_password !== confirm_new_password) {
-                alertNotifaction(  $('#confirm_new_password'), "Passwords do not match.");
-            }
+            if(event.target.id === "changePasswordForm"){
+                validateField(current_password, '#current_password', 'Password must be at least 8 characters long.');
+                validateField(new_password, '#new_password', 'Password must be at least 8 characters long.');
 
-            if (new_password === current_password) {
-                alertNotifaction(  $('#new_password'), "The new password could not be the same as the old password.");
+                if (!confirm_new_password || new_password !== confirm_new_password) {
+                    alertNotifaction(  $('#confirm_new_password'), "Passwords do not match.");
+                }
+    
+                if (new_password === current_password) {
+                    alertNotifaction(  $('#new_password'), "The new password could not be the same as the old password.");
+                }
             }
+   
 
             if ($('.border-danger').length > 0) {
                 throw new Error('Invalid format');
             }
+
         } catch (error) {
             console.error(error);
             event.preventDefault();

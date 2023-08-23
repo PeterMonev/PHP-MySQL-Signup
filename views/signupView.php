@@ -1,5 +1,5 @@
 <?php 
-include('./header.php');
+include('../shared/header.php');
 session_start(); ?>
 
 <body>
@@ -8,7 +8,7 @@ session_start(); ?>
 <?php
     if (isset($_SESSION['success_message'])) {
         echo '<div class="alert alert-success text-center" role="alert"> '.
-        $_SESSION['success_message'] . ' <a href="loginView.php" class="alert-link">Login here</a></div>';
+        $_SESSION['success_message'] . ' <a href="../views/loginView.php" class="alert-link">Login here</a></div>';
         unset($_SESSION['success_message']);
     } 
     if (isset($_SESSION['error_message'])) {
@@ -19,7 +19,7 @@ session_start(); ?>
 
     <div class="container mt-5 text-center shadow-lg rounded w-50 p-4">
         <h2>Sign Up Form</h2>
-        <form id="signupForm" action="signupController.php" method="post">
+        <form id="signupForm" action="../controllers/signupController.php" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
@@ -43,11 +43,11 @@ session_start(); ?>
             <button type="submit" name="signup" class="btn btn-primary mt-3">Sign Up</button>
             <div class="form-group mt-3">
                 <label for="route">You already have an account? Go to login.</label>  
-                <a href="loginView.php">Login</a>
+                <a href="../views/loginView.php">Login</a>
             </div>
         </form>
     </div>
-    <script src="./utility/validation.js"></script>
+    <script src="../utility/validation.js"></script>
     <script>
         setTimeout(function() {
             const alertDiv = document.querySelector('.alert-danger');

@@ -1,6 +1,6 @@
 <?php
-include('./header.php');
-require_once('profileController.php');
+include('../shared/header.php');
+require_once('../controllers/profileController.php');
 
 $userData = getUserData();
 ?>
@@ -30,7 +30,7 @@ $userData = getUserData();
             <p class="card-text">Phone: <?php echo $userData['phone']; ?></p>
             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#updateProfileModal">Update Profile</a>
             <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#changePasswordModal">Change Password</a>
-            <a href="logout.php" class="btn btn-danger">Logout</a>
+            <a href="../logout.php" class="btn btn-danger">Logout</a>
         </div>
     </div>
 </div>
@@ -41,10 +41,10 @@ $userData = getUserData();
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="updateProfileModalLabel">Update Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="profileController.php" method="post">
+        <form action="../controllers/profileController.php" id='updateForm' method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" name="username" value="<?php echo $userData['username']; ?>">
@@ -76,7 +76,7 @@ $userData = getUserData();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="profileController.php" method="post">
+                <form action="../controllers/profileController.php" id="changePasswordForm" method="post">
                     <div class="form-group">
                         <label for="current_password">Current Password:</label>
                         <input type="password" class="form-control" id="current_password" name="current_password">
@@ -100,7 +100,7 @@ $userData = getUserData();
 </div>
 
 
-<script src="./utility/validation.js"></script>
+<script src="../utility/validation.js"></script>
 <script>
         setTimeout(function() {
             const alertDiv = document.querySelector('.alert');

@@ -1,5 +1,5 @@
 <?php 
-include('./header.php');
+include('../shared/header.php');
 session_start();
 
 
@@ -21,7 +21,7 @@ session_start();
 
     <div class="container mt-5 p-4 text-center w-50 shadow-lg rounded">
         <h2>Login</h2>
-        <form id="loginForm" action="loginController.php" method="post">
+        <form id="loginForm" action="../controllers/loginController.php" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required >
@@ -33,13 +33,13 @@ session_start();
             <button type="submit" name="login" id="submit" class="btn btn-primary">Login</button>
             <div class="form-group my-3">
                 <label for="route">You already don't have account? Go to Sign Up.</label>  
-                <a href="./signupView.php" class="pb-4">Sign Up</a>
-                <div  class="container p-2"> <a href="./forgotPasswordView.php">Forgot Password?</a></div>
+                <a href="../views/signupView.php" class="pb-4">Sign Up</a>
+                <div  class="container p-2"> <a href="../views/forgotPasswordView.php">Forgot Password?</a></div>
                
             </div>
         </form>
     </div>
-    <script src="./utility/validation.js"></script>
+    <script src="../utility/validation.js"></script>
     <script>
         setTimeout(function() {
             const alertDiv = document.querySelector('.alert-danger');

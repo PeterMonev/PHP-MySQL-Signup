@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('./header.php');
+include('../shared/header.php');
 
 if(isset($_SESSION['error_message'])) {
     echo '<div class="alert alert-danger text-center">' . $_SESSION['error_message'] . '</div>';
@@ -21,7 +21,7 @@ if(isset($_SESSION['success_message'])) {
             <div class="card">
                 <div class="card-header">Password Recovery</div>
                 <div class="card-body">
-                    <form action="forgotPasswordController.php" method="post">
+                    <form action="../controllers/forgotPasswordController.php" method="post">
                         <div class="form-group">
                             <label for="email">Enter your email:</label>
                             <input type="email" name="email" class="form-control" required>

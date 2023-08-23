@@ -3,7 +3,7 @@ session_start();
 
 try {
    
-    require_once('forgotPasswordModel.php');
+    require_once('../models/forgotPasswordModel.php');
     $reset = new forgotPasswordModel();
 
     // Send email for validation
@@ -13,7 +13,7 @@ try {
 
         if(!$success) {
             $_SESSION['error_message'] = "This email doens't exits!";
-            header('Location: forgotPasswordView.php');
+            header('Location: ../views/forgotPasswordView.php');
             exit();
         }
     }
@@ -29,7 +29,7 @@ try {
         $token = $_GET['token'];
         if ($reset->resetPassword($token, $newPassword)) {
             $_SESSION['success_message'] = 'Change password successful!';
-            header("Location:loginView.php");
+            header("Location: ../views/loginView.php");
             exit();
         } else {
             throw new Exception('Invalid token!');
@@ -37,7 +37,7 @@ try {
     }
 } catch (Exception $e) {
     $_SESSION['error_message'] = $e->getMessage();
-    header('Location: resetPasswordView.php');
+    header('Location: ../views/forgotPasswordView.php');
     exit();
 }
 ?>

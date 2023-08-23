@@ -1,5 +1,5 @@
 <?php
-require_once('./database/dbConnect.php');
+require_once('../database/dbConnect.php');
 
 class forgotPasswordModel {
 
@@ -34,7 +34,7 @@ class forgotPasswordModel {
     
     private function sendEmail($email, $token) {
         $subject = "Password Reset";
-        $body = "Click here to reset your password: http://localhost/signup/resetPasswordView.php?token=".$token;
+        $body = "Click here to reset your password: http://localhost/signup/views/resetPasswordView.php?token=".$token;
         mail($email, $subject, $body);
     }
 

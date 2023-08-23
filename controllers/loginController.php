@@ -6,7 +6,7 @@ class ValidationException extends Exception{}
 
 // Check if the login form has been submitted.
 if(isset($_POST['login'])){
-    require_once('loginModel.php');
+    require_once('../models/loginModel.php');
 
     try{
     // Backend Valdaiton
@@ -31,17 +31,18 @@ if(isset($_POST['login'])){
 
     if($login){
         $_SESSION['success_message'] = 'Login succesful!'; // If credentials are valid.
-        header("Location:profileView.php");  // Redirect to Profile page
+        header("Location: ../views/profileView.php");  // Redirect to Profile page
         exit();
     } else {
         $_SESSION['error_message'] = 'Invalid password or email!';
-        header('Location: loginView.php');
+        header('Location: ../views/loginView.php');
         exit();
     }
+    
 
     } catch (ValidationException $e) {
          $_SESSION['error_message'] = $e->getMessage();
-         header('Location: loginView.php');
+         header('Location: ../views/loginView.php');
          exit();
     }
 }

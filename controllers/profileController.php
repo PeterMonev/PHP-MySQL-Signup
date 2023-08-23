@@ -1,14 +1,14 @@
 <?php
 
 session_start();
-require_once('profileModel.php');
+require_once("../models/profileModel.php");
 
 class ValidationException extends Exception {}
 
 function getUserData(){
     if(!isset($_SESSION['id'])){
       // Redirect if not logged in
-      header("Location: loginView.php");
+      header("Location: ../views/loginView.php");
       exit();
     }
 
@@ -56,7 +56,7 @@ if(isset($_POST['update'])){
         if($userData['email'] === $email){
             $newProfile->updateProfile($_SESSION['id']); 
             $_SESSION['success_message'] = 'Update successful!';
-            header("Location: profileView.php?showModal=true");
+            header("Location: ../views/profileView.php?showModal=true");
             exit();
         } else {
             // Check for existing email
@@ -65,14 +65,14 @@ if(isset($_POST['update'])){
             } else {
                 $newProfile->updateProfile($_SESSION['id']); 
                 $_SESSION['success_message'] = 'Update successful!';
-                header("Location: profileView.php?showModal=true");
+                header("Location: ../views/profileView.php?showModal=true");
                 exit();
             } 
         }
 
     } catch (ValidationException $e) {
         $_SESSION['error_message'] = $e->getMessage();
-        header("Location: profileView.php?showModal=true");
+        header("Location: ../views/profileView.php?showModal=true");
         exit();
     }
 }
@@ -100,11 +100,11 @@ if(isset($_POST['change_password'])){
         $profile->updatePassword($_SESSION['id'], $newPassword);
 
         $_SESSION['success_message'] = 'Password changed successfully!';
-        header("Location: profileView.php");
+        header("Location: ../views/profileView.php");
         exit();
     }  catch (ValidationException $e) {
         $_SESSION['error_message'] = $e->getMessage();
-        header("Location: profileView.php?showModal=true");
+        header("Location: ../views/profileView.php?showModal=true");
         exit();
     }
 }

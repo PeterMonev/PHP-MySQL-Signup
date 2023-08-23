@@ -1,5 +1,5 @@
 <?php
-require_once("./database/dbConnect.php");
+require_once("../database/dbConnect.php");
 
 class LoginModel {
 

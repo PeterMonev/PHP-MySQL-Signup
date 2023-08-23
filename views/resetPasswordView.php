@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include('./header.php');
+include('../shared/header.php');
 
 $token = isset($_GET['token']) ? $_GET['token'] : ''; // Get the token from the URL
 
@@ -23,7 +23,7 @@ if(isset($_SESSION['success_message'])) {
             <div class="card">
                 <div class="card-header">Password Recovery Form</div>
                 <div class="card-body">
-                    <form action="forgotPasswordController.php" method="post">
+                    <form action="../controllers/forgotPasswordController.php" method="post">
                         <!-- Hidden input field for the token -->
                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
 
@@ -38,7 +38,7 @@ if(isset($_SESSION['success_message'])) {
         </div>
     </div>
 </div>
-<script src="./utility/validation.js"></script>
+<script src="../utility/validation.js"></script>
 <script>
         setTimeout(function() {
             const alertDiv = document.querySelector('.alert-danger');
