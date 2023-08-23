@@ -17,6 +17,7 @@ function getUserData(){
     return $userData;
 }
 
+// Profile Update submit function
 if(isset($_POST['update'])){
     try {
         $userData = getUserData(); 
@@ -70,6 +71,38 @@ if(isset($_POST['update'])){
         }
 
     } catch (ValidationException $e) {
+        $_SESSION['error_message'] = $e->getMessage();
+        header("Location: profileView.php?showModal=true");
+        exit();
+    }
+}
+
+// Change password submit function
+if(isset($_POST['change_password'])){
+    try {
+        $currentPassword = trim($_POST['current_password']);
+        $newPassword = trim($_POST['new_password']);
+        $confirmNewPassword = trim($_POST['confirm_new_password']);
+
+        if (empty($currentPassword) || empty($newPassword) || empty($confirmNewPassword)) {
+            throw new ValidationException('All fields are required.');
+        }
+
+        if ($newPassword !== $confirmNewPassword) {
+            throw new ValidationException('New passwords do not match.');
+        }
+
+        $profile = new ProfileModel();
+        if (!$profile->verifyCurrentPassword($_SESSION['id'], $currentPassword)) {
+            throw new ValidationException('Current password is incorrect.');
+        }
+
+        $profile->updatePassword($_SESSION['id'], $newPassword);
+
+        $_SESSION['success_message'] = 'Password changed successfully!';
+        header("Location: profileView.php");
+        exit();
+    }  catch (ValidationException $e) {
         $_SESSION['error_message'] = $e->getMessage();
         header("Location: profileView.php?showModal=true");
         exit();

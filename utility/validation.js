@@ -1,16 +1,27 @@
 $(document).ready(function() {
 
+    // All submit forn in projects validation
      $('form').on('submit', function(event) {
-        const { username, password, repeatPassword, phone, email } = Object.fromEntries(new FormData(this));
-
+        const { username, password, repeatPassword, phone, email, current_password, new_password, confirm_new_password } = Object.fromEntries(new FormData(this));
+        console.log( current_password, new_password, confirm_new_password);
         try {
             validateField(username, '#username', 'Username must be at least 3 characters long.');
             validateField(password, '#password', 'Password must be at least 8 characters long.');
             validateField(email, '#email','Invalid email format. You are email muse be like: example@abv.bg.');
             validateField(phone, '#phone', 'Invalid phone format. You are phone number must be like: +359 XX XXX XXX');
-            
+            validateField(current_password, '#current_password', 'Password must be at least 8 characters long.');
+            validateField(new_password, '#new_password', 'Password must be at least 8 characters long.');
+
             if (!repeatPassword || password !== repeatPassword) {
                 alertNotifaction(  $('#repeatPassword'), "Passwords do not match.");
+            }
+
+            if (!confirm_new_password || new_password !== confirm_new_password) {
+                alertNotifaction(  $('#confirm_new_password'), "Passwords do not match.");
+            }
+
+            if (new_password === current_password) {
+                alertNotifaction(  $('#new_password'), "The new password could not be the same as the old password.");
             }
 
             if ($('.border-danger').length > 0) {
@@ -38,6 +49,17 @@ $(document).ready(function() {
         }
 
         if(selector === '#phone' && ( input === undefined || !phoneRegex.test(input))){
+            alertNotifaction(selector, errorMessage);
+        }
+
+        if (selector === '#current_password' && (input === undefined || input.length < 8)) {
+            alertNotifaction(selector, errorMessage);
+        }
+
+        if (selector === '#new_password' && (input === undefined || input.length < 8)) {
+            alertNotifaction(selector, errorMessage);
+        }
+        if (selector === '#current_password' && (input === undefined || input.length === 0)) {
             alertNotifaction(selector, errorMessage);
         }
 

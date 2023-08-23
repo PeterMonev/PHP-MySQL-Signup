@@ -17,7 +17,7 @@ session_start(); ?>
     }
 ?>
 
-    <div class="container mt-5 text-center shadow-lg">
+    <div class="container mt-5 text-center shadow-lg rounded w-50 p-4">
         <h2>Sign Up Form</h2>
         <form id="signupForm" action="signupController.php" method="post">
             <div class="form-group">
@@ -40,8 +40,8 @@ session_start(); ?>
                 <label for="phone">Phone:</label>
                 <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
             </div>
-            <button type="submit" name="signup" class="btn btn-primary">Sign Up</button>
-            <div class="form-group">
+            <button type="submit" name="signup" class="btn btn-primary mt-3">Sign Up</button>
+            <div class="form-group mt-3">
                 <label for="route">You already have an account? Go to login.</label>  
                 <a href="loginView.php">Login</a>
             </div>

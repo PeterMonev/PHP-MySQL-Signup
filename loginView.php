@@ -19,7 +19,7 @@ $pageTitle = "Login";
     }
     ?>
 
-    <div class="container mt-5 text-center w-50 shadow-lg">
+    <div class="container mt-5 text-center w-50 shadow-lg rounded">
         <h2>Login</h2>
         <form id="loginForm" action="loginController.php" method="post">
             <div class="form-group">
@@ -31,9 +31,9 @@ $pageTitle = "Login";
                 <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  required>
             </div>
             <button type="submit" name="login" id="submit" class="btn btn-primary">Login</button>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label for="route">You already don't have account? Go to Sign Up.</label>  
-                <a href="signupView.php">Sign Up</a>
+                <a href="signupView.php" class="pb-4">Sign Up</a>
             </div>
         </form>
     </div>

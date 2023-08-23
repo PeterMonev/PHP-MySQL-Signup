@@ -3,7 +3,6 @@ include('./header.php');
 require_once('profileController.php');
 
 $userData = getUserData();
-
 ?>
 
 <body>
@@ -11,7 +10,7 @@ $userData = getUserData();
 <?php
     if (isset($_SESSION['success_message'])) {
         echo '<div class="alert alert-success text-center" role="alert"> '.
-        $_SESSION['success_message'] . ' Update successful!</div>';
+        $_SESSION['success_message'] . '</div>';
         unset($_SESSION['success_message']);
     } 
     if (isset($_SESSION['error_message'])) {
@@ -20,7 +19,7 @@ $userData = getUserData();
     }
 ?>
 
-<div class="container mt-5">
+<div class="container mt-5 shadow-lg p-5 rounded">
     <div class="card">
         <div class="card-header">
             Profile Page Information
@@ -30,18 +29,19 @@ $userData = getUserData();
             <p class="card-text">Email: <?php echo $userData['email']; ?></p>
             <p class="card-text">Phone: <?php echo $userData['phone']; ?></p>
             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#updateProfileModal">Update Profile</a>
+            <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#changePasswordModal">Change Password</a>
             <a href="logout.php" class="btn btn-danger">Logout</a>
         </div>
     </div>
 </div>
 
 <!-- Modal Update Page -->
-<div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
+<div class="modal fade " id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="updateProfileModalLabel">Update Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="profileController.php" method="post">
@@ -57,24 +57,51 @@ $userData = getUserData();
                 <label for="phone">Phone Number:</label>
                 <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo $userData['phone']; ?>">
             </div>
-            <button type="submit" name="update" class="btn btn-success mt-3">Update changes</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="submit" name="update" class="btn btn-success">Update changes</button>
+            </div> 
         </form>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('showModal') && urlParams.get('showModal') === 'true') {
-        const modalElement = document.getElementById('updateProfileModal');
-        // Assuming you're using Bootstrap
-        const modal = new bootstrap.Modal(modalElement);
-        modal.show();
-    }
-});
+<!-- Modal Change Password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="profileController.php" method="post">
+                    <div class="form-group">
+                        <label for="current_password">Current Password:</label>
+                        <input type="password" class="form-control" id="current_password" name="current_password">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">New Password:</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_new_password">Confirm New Password:</label>
+                        <input type="password" class="form-control" id="confirm_new_password" name="confirm_new_password">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" name="change_password" class="btn btn-success">Change Password</button>
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<script src="./utility/validation.js"></script>
+<script>
         setTimeout(function() {
             const alertDiv = document.querySelector('.alert');
             if (alertDiv) {
