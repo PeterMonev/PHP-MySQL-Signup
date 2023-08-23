@@ -1,6 +1,6 @@
 <?php
 
-require_once("dbConnect.php");
+require_once("./database/dbConnect.php");
 
 class ProfileModel {
     private $username;

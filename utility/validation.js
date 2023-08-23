@@ -2,8 +2,8 @@ $(document).ready(function() {
 
     // All submit forn in projects validation
      $('form').on('submit', function(event) {
-        const { username, password, repeatPassword, phone, email, current_password, new_password, confirm_new_password } = Object.fromEntries(new FormData(this));
-        console.log( current_password, new_password, confirm_new_password);
+        const { username, password, repeatPassword, phone, email, current_password, new_password, confirm_new_password,newPassword } = Object.fromEntries(new FormData(this));
+        console.log(newPassword);
         try {
             validateField(username, '#username', 'Username must be at least 3 characters long.');
             validateField(password, '#password', 'Password must be at least 8 characters long.');
@@ -11,6 +11,8 @@ $(document).ready(function() {
             validateField(phone, '#phone', 'Invalid phone format. You are phone number must be like: +359 XX XXX XXX');
             validateField(current_password, '#current_password', 'Password must be at least 8 characters long.');
             validateField(new_password, '#new_password', 'Password must be at least 8 characters long.');
+            validateField(newPassword, '#newPassword', 'Password must be at least 8 characters long.');
+
 
             if (!repeatPassword || password !== repeatPassword) {
                 alertNotifaction(  $('#repeatPassword'), "Passwords do not match.");
@@ -60,6 +62,9 @@ $(document).ready(function() {
             alertNotifaction(selector, errorMessage);
         }
         if (selector === '#current_password' && (input === undefined || input.length === 0)) {
+            alertNotifaction(selector, errorMessage);
+        }
+        if (selector === '#newPassword' && (input === undefined || input.length < 8)) {
             alertNotifaction(selector, errorMessage);
         }
 

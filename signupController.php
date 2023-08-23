@@ -5,7 +5,7 @@ class ValidationException extends Exception {}
 
 // Check if the register form has been submitted.
 if(isset($_POST['signup'])){
-    require_once("signupModel.php");
+    require_once("./signupModel.php");
 
     try {
         // Backend Validation

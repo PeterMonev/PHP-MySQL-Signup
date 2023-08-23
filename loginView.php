@@ -1,8 +1,8 @@
 <?php 
-include('./header.php'); 
+include('./header.php');
 session_start();
 
-$pageTitle = "Login";
+
 ?>
 
 <body>
@@ -19,7 +19,7 @@ $pageTitle = "Login";
     }
     ?>
 
-    <div class="container mt-5 text-center w-50 shadow-lg rounded">
+    <div class="container mt-5 p-4 text-center w-50 shadow-lg rounded">
         <h2>Login</h2>
         <form id="loginForm" action="loginController.php" method="post">
             <div class="form-group">
@@ -33,7 +33,9 @@ $pageTitle = "Login";
             <button type="submit" name="login" id="submit" class="btn btn-primary">Login</button>
             <div class="form-group my-3">
                 <label for="route">You already don't have account? Go to Sign Up.</label>  
-                <a href="signupView.php" class="pb-4">Sign Up</a>
+                <a href="./signupView.php" class="pb-4">Sign Up</a>
+                <div  class="container p-2"> <a href="./forgotPasswordView.php">Forgot Password?</a></div>
+               
             </div>
         </form>
     </div>
