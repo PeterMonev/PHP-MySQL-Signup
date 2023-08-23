@@ -9,7 +9,8 @@ This is a my first PHP & MySQL (MVC model) web application that includes user si
 - Open the database/dbConnect.php file and update the hostname, db_name, username, and password variables to match your MySQL server configuration.
 3. Import Database Schema:
 - You can find the schema of the users database in the users.sql file located in the database directory. Import this SQL file into your database using a tool like phpMyAdmin.
-4.Running the Project:
--Start XAMPP and ensure Apache and MySQL services are running.
--Open your web browser and navigate to http://localhost/signup/views/loginView.php for Login Page or Sing Up Page navigate to http://localhost/signup/views/signupView.php
- 
+4. Running the Project:
+- Start XAMPP and ensure Apache and MySQL services are running.
+- Open your web browser and navigate to:
+- Login Page: http://localhost/signup/views/loginView.php 
+- Sing Up Page: http://localhost/signup/views/signupView.php
